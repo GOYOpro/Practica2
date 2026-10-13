@@ -16,57 +16,61 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import android.R.attr.value
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.core.text.isDigitsOnly
 import com.example.myapplication.R
 import java.util.function.DoubleUnaryOperator
-
+import androidx.compose.foundation.lazy.items
+import android.util.Log.i
+import androidx.compose.runtime.mutableStateListOf
 @Composable
 fun InicioScreen(modifier : Modifier, numero: Int, click:() -> Unit ) {
     Column(
         modifier = Modifier
     ) {
         var entrada1 by remember { mutableStateOf("") }
-        var entrada2 by remember { mutableStateOf("") }
-        var impresion by remember { mutableStateOf("")}
+        val nombres = remember { mutableStateListOf<String>() }
         Spacer(modifier = Modifier.padding(20.dp))
 
+        Column(modifier = Modifier) {
+            Box(modifier = Modifier)
+        }
 
         TextField(
             value = entrada1,
             onValueChange = { entrada1 = it},
-            label = {Text("Cantidad")},
+            label = {Text("Nombre")},
             singleLine = true
         )
 
         Spacer(modifier = Modifier.padding(20.dp))
 
-        TextField(
-            value = entrada2,
-            onValueChange = { entrada2 = it},
-            label = {Text("Letra")},
-            singleLine = true
-        )
-
-        Spacer(modifier = Modifier.padding(20.dp))
 
         Button(onClick = {
-           var veces = entrada1.toInt();
-           var contador = "";
-            for(i in 1.. veces){
-                contador+= entrada2;
-        }
-            impresion = contador;
+            nombres.add(entrada1);
+            entrada1 = ""
         }) {
-            Text(text = "Imprimir")
+            Text(text = "Agregar")
         }
 
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            items( nombres) { nombre ->
+                Insert(modifier, nombre)
+            }
+        }
 
-        Text(text = "$impresion")
     }
 }
 
