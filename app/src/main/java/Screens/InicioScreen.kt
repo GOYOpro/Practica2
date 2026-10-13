@@ -30,55 +30,43 @@ fun InicioScreen(modifier : Modifier, numero: Int, click:() -> Unit ) {
     Column(
         modifier = Modifier
     ) {
-        var numero1 by remember { mutableStateOf("") }
-        var numero2 by remember { mutableStateOf("") }
-        var Resultado by remember { mutableStateOf("")}
+        var entrada1 by remember { mutableStateOf("") }
+        var entrada2 by remember { mutableStateOf("") }
+        var impresion by remember { mutableStateOf("")}
         Spacer(modifier = Modifier.padding(20.dp))
 
 
         TextField(
-            value = numero1,
-            onValueChange = { numero1 = it},
-            label = {Text("Numero 1")},
+            value = entrada1,
+            onValueChange = { entrada1 = it},
+            label = {Text("Cantidad")},
             singleLine = true
         )
 
         Spacer(modifier = Modifier.padding(20.dp))
 
         TextField(
-            value = numero2,
-            onValueChange = { numero2 = it},
-            label = {Text("Numero 2")},
+            value = entrada2,
+            onValueChange = { entrada2 = it},
+            label = {Text("Letra")},
             singleLine = true
         )
 
         Spacer(modifier = Modifier.padding(20.dp))
 
         Button(onClick = {
-            Resultado = (numero1.toDouble()+numero2.toDouble()).toString()
+           var veces = entrada1.toInt();
+           var contador = "";
+            for(i in 1.. veces){
+                contador+= entrada2;
+        }
+            impresion = contador;
         }) {
-            Text(
-                "+"
-            )
+            Text(text = "Imprimir")
         }
 
-        Button(onClick = {
-            Resultado = (numero1.toDouble() - numero2.toDouble()).toString()
-        }){
-            Text(
-                "-"
-            )
-        }
 
-        Button(onClick = {
-            Resultado = (numero1.toDouble() * numero2.toDouble()).toString()
-        }) {
-            Text(
-                "x"
-            )
-        }
-
-        Text(Resultado.toString(), fontSize = 30.sp)
+        Text(text = "$impresion")
     }
 }
 

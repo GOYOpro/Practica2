@@ -6,7 +6,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.preferKeepClear
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,8 +28,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyApplicationTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    var x by remember { mutableStateOf(0) }
-                    InicioScreen(modifier = Modifier.padding(innerPadding), x, {x+=1})
+                    InicioScreen(
+                        modifier = Modifier
+                            .padding(innerPadding),
+                        numero = 0
+                    ){
+                    }
                 }
             }
         }
